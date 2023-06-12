@@ -1,0 +1,12 @@
+pandas
+plotly
+numpy 
+matplotlib
+random2
+scipy 
+scikit-learn
+kaleido
+ipython
+nbformat>=4.2.0
+ipywidgets>=7.0.0
+imageio

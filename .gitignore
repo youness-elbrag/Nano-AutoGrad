@@ -1,4 +1,8 @@
 #env
 .git/
-digit-recognizer
+digit-recognizer/
 img/
+assets/
+.vscode/
+.ipynb_checkpoints/
+app/
