@@ -53,6 +53,19 @@ class Value:
         out._backward = _backward
 
         return out
+        
+    def softmax(self):
+
+        out =  Value(np.exp(self.data) / np.sum(np.exp(self.data), axis=1)[:, None], (self,), 'softmax')
+        softmax = out.data
+        def _backward():
+            self.grad += (out.grad - np.reshape(
+            np.sum(out.grad * softmax, 1),
+            [-1, 1]
+              )) * softmax
+        out._backward = _backward
+
+        return out
 
     def backward(self):
 

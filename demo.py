@@ -19,7 +19,10 @@ import os
 # make up a dataset
 def initialize_data(n_samples: int, noise: float):
     input_data, Target = make_moons(n_samples=n_samples, noise=noise)
-    Target = Target * 2 - 1  # make y be -1 or 1
+    print(input_data[0][0])
+    print(Target[0])
+
+    Target = Target * 2 - 1  # make y be -1 or 14
     fig = go.Figure(data=go.Scatter(x=input_data[:, 0], y=input_data[:, 1], mode='markers', marker=dict(color=Target, size=10, colorscale='jet')))
     fig.write_image('plot.png')
     # fig.close()
@@ -164,19 +167,11 @@ if __name__ == "__main__":
 
     np.random.seed(1337)
     random.seed(1337)
-    ## initiale the data 
     X_train , y_train = initialize_data(n_samples=100 ,noise=0.1)
-
-    # initialize a model 
-    model = MLP(2, [16, 16, 1]) # 2-layer neural network
+    model = MLP(2, [16,16,1]) # 2-layer neural network
     print(model)
     print("number of parameters", len(model.parameters()))
-    
-    model = Optimazition_training_progress_realtime(num_epoch=50,model=model , x_train=X_train ,y_train=y_train)
-    time.sleep(0.5)
+    model = Optimazition_training_progress_realtime(num_epoch=1,model=model , x_train=X_train ,y_train=y_train)
 
-    # Visualize decision boundary
-
-    time.sleep(0.5)
     
 
