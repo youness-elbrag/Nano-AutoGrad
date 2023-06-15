@@ -6,7 +6,7 @@ import random
 class Value:
     """ stores a single scalar value and its gradient """
 
-    def __init__(self, data, _children=(), _op=''):
+    def __init__(self, data=None, _children=(), _op=''):
         if data is None:
           data = random.uniform(-1,1)
         self.data = data
@@ -121,6 +121,10 @@ class Value:
 
     def __repr__(self):
         return f"Value(data={self.data}, grad={self.grad})"
+    
+    def __float__(self): return float(self.data)
+
+
         
     
 
