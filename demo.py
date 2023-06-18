@@ -1,10 +1,10 @@
 import random
 import numpy as np
-from sklearn.datasets import make_moons, make_blobs
 from core.engine import Value
 from core.nn import Neuron, Layer, MLP
 from core.SparsityNN import SparseMLP
 import time 
+import imageio
 from functools import partial
 import matplotlib.animation as animation
 import shutil
@@ -21,17 +21,9 @@ import matplotlib.pyplot as plt
 import os
 from uilit import *
 
-# make up a dataset
-def initialize_data(n_samples: int, noise: float):
-    input_data, Target = make_moons(n_samples=n_samples, noise=noise)
-    print(input_data[0][0])
-    print(Target[0])
+path_data = 'digit-recognizer/data/'
 
-    Target = Target * 2 - 1  # make y be -1 or 14
-    fig = go.Figure(data=go.Scatter(x=input_data[:, 0], y=input_data[:, 1], mode='markers', marker=dict(color=Target, size=10, colorscale='jet')))
-    fig.write_image('plot.png')
-    # fig.close()
-    return input_data, Target
+
 
 # loss function
 def loss(model,X_train , y_train , batch_size=None):
@@ -60,13 +52,15 @@ def loss(model,X_train , y_train , batch_size=None):
     accuracy = [(yi > 0) == (scorei.data > 0) for yi, scorei in zip(yb, scores)]
     return total_loss, sum(accuracy) / len(accuracy)
 
-def Optimization_training_progress_realtime(num_epoch, model, x_train, y_train):
+def Optimization_training_progress_realtime(Task,num_epoch, learning_rate ,num_layer,values_wieghts):
+    filename = f"assets/plot_res_{num_epoch-1}.png"
+    if os.path.exists(filename):
+        shutil.rmtree('assets/')
+        os.makedirs('assets/')
     # Create empty lists for loss and accuracy
     loss_data = []
     accuracy_data = []
-    Wieghts_parameters = []
-
-
+    model = MLP(int(num_layer), [int(values_wieghts),int(values_wieghts),1]) # 2-layer neural network
     # Create subplots with shared x-axis
     fig = make_subplots(rows=2, cols=1, shared_xaxes=True, subplot_titles=("Loss", "Accuracy"))
 
@@ -89,16 +83,21 @@ def Optimization_training_progress_realtime(num_epoch, model, x_train, y_train):
         yaxis2=dict(title="Accuracy"),
         showlegend=False,
         hovermode='x',
-        height=800,
-        width=800,
+        height=500,
+        width=500,
         template='plotly_white'
     )
     # Define animation frames
     frames = []
-
+    if Task in "Sparsity":
+        X_train , Y_train = initialize_data(n_samples=100 ,noise=0.1)
+        
+    elif Task in "Classification":
+        FILES , _  = extract_path_df(path_data,10)
+        X_train, X_test, Y_train, Y_test = loading_df_to_numpy(FILES[0])
     for k in range(num_epoch):
         # Forward pass
-        total_loss, acc = loss(model, x_train, y_train, batch_size=None)
+        total_loss, acc = loss(model, X_train, Y_train, batch_size=None)
 
         # Backward pass
         model.zero_grad()
@@ -106,11 +105,13 @@ def Optimization_training_progress_realtime(num_epoch, model, x_train, y_train):
 
         # Update (SGD)
         learning_rate = 1.0 - 0.9 * k / 100
+
         for p in model.parameters():
-            p.data -= learning_rate * p.grad    
+            p.data -= learning_rate * p.grad 
 
-        Wieghts_parameters.append(model)
-
+        if k % 2 == 0:
+            print(f"step {k} loss {total_loss.data}, accuracy {acc*100}%")
+   
         # Append data to lists
         loss_data.append(total_loss.data)
         accuracy_data.append(acc)
@@ -125,8 +126,28 @@ def Optimization_training_progress_realtime(num_epoch, model, x_train, y_train):
         # Append current frame to frames list
         frames.append(go.Frame(data=[fig.data[0], fig.data[1]]))
 
-    # Add frames to animation
+        if Task in "Sparsity":
+            h = 0.25
+            x_min, x_max = X_train[:, 0].min() - 1, X_train[:, 0].max() + 1
+            y_min, y_max = X_train[:, 1].min() - 1, X_train[:, 1].max() + 1
+            xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+                                np.arange(y_min, y_max, h))
+
+            Xmesh = np.c_[xx.ravel(), yy.ravel()]
+            inputs = [list(map(Value, xrow)) for xrow in Xmesh]
+            scores = list(map(model, inputs))
+            Z = np.array([s.data > 0 for s in scores])
+            Z = Z.reshape(xx.shape)
+
+            plt.contourf(xx, yy, Z, cmap=plt.cm.Spectral, alpha=0.8)
+            plt.scatter(X_train[:, 0], X_train[:, 1], c=Y_train, s=40, cmap=plt.cm.Spectral)
+            plt.xlim(xx.min(), xx.max())
+            plt.ylim(yy.min(), yy.max())
+            plt.savefig(f'assets/plot_res_{k}.png')
+     # Add frames to animation
     fig.frames = frames
+    nframes = num_epoch
+    interval = num_epoch * 2
 
     # Create animation
     animation = go.Figure(fig)
@@ -151,127 +172,51 @@ def Optimization_training_progress_realtime(num_epoch, model, x_train, y_train):
 
     # Display animation
     # Save animation as GIF
-    animation.show()
-    animation.write_image("training_animation.svg", engine="kaleido")
-    return Wieghts_parameters
-
-def create_animation(models, X_train, y_train):
-    fig = go.Figure()
-
-    # Generate contour data for each model
-    h = 0.25
-    x_min, x_max = X_train[:, 0].min() - 1, X_train[:, 0].max() + 1
-    y_min, y_max = X_train[:, 1].min() - 1, X_train[:, 1].max() + 1
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-                         np.arange(y_min, y_max, h))
-
-    Xmesh = np.c_[xx.ravel(), yy.ravel()]
-
-    Z_values = []
-    for model in models:
-        inputs = [list(map(Value, xrow)) for xrow in Xmesh]
-        scores = list(map(model, inputs))
-        Z = np.array([s.data > 0 for s in scores])
-        Z = Z.reshape(xx.shape)
-        print(Z.shape)
-        Z_values.append(Z)
-
-
-    # Create initial contour trace
-    contour_trace = go.Contour(
-        x=xx.ravel(),
-        y=[].reshape(xx.shape),
-        colorscale='Jet',
-        showscale=False,
-        opacity=0.8
-    )
-    fig.add_trace(contour_trace)
-
-    # Scatter plot
-    scatter_trace = go.Scatter(
-        x=X_train[:, 0],
-        y=X_train[:, 1],
-        mode='markers',
-        marker=dict(
-            color=y_train,
-            colorscale='Jet',
-            size=6,
-            showscale=False
-        )
-    )
-    fig.add_trace(scatter_trace)
-
-    # Layout settings
-    fig.update_layout(
-        title="Model Visualization",
-        xaxis=dict(range=[x_min, x_max]),
-        yaxis=dict(range=[y_min, y_max]),
-        showlegend=False,
-        width=800,
-        height=600,
-        plot_bgcolor='black',
-        paper_bgcolor='black',
-        font=dict(color='white')
-    )
-
-    # Animation frames
-    frames = []
-    for Z in Z_values:
-        contour_trace = go.Contour(
-            x=xx.ravel(),
-            y=yy.ravel(),
-            z=Z,
-            colorscale='Jet',
-            showscale=False,
-            opacity=0.8
-        )
-        frame = go.Frame(data=[contour_trace])
-        frames.append(frame)
-
-    fig.frames = frames
-
-    # Animation layout settings
-    fig.update_layout(
-        updatemenus=[
-            dict(
-                type="buttons",
-                buttons=[
-                    dict(
-                        label="Play",
-                        method="animate",
-                        args=[None, {"frame": {"duration": 500, "redraw": True}, "fromcurrent": True}],
-                    ),
-                    dict(
-                        label="Pause",
-                        method="animate",
-                        args=[[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate"}],
-                    )
-                ],
-                showactive=False,
-                direction="left",
-                x=0.1,
-                y=0,
-                xanchor="right",
-                yanchor="bottom"
-            ),
-        ],
-    )
-
-    fig.show()
-
-
         
+    if Task in "Sparsity":
+        fig_1 = plt.figure()
+        def animate_predicion(i):
+            im1 = plt.imread(f"assets/plot_res_{i}.png")
+            plt.imshow(im1)
+            plt.title(f"Epoch: {i+1}\nLoss: {loss_data[i]:.4f} - Accuracy: {accuracy_data[i]:.4f}")
+            plt.xlabel("prediction")
+            fig_1.tight_layout()
+
+        anim_= FuncAnimation(fig_1, animate_predicion, frames=nframes, interval=interval)
+        anim_.save("out/training.gif", writer="imagemagick")
+        # Read the animated GIF
+       # Create the Plotly figure
+        img = "out/training.gif"
+        # Display the animation
+     # Show the figure
+        return animation , img
+
+    if Task in "Classification":
+        inputs_test = [list(map(Value, xrow)) for xrow in X_test]
+        predictions = [scorei.data.argmax() for scorei in list(map(model, inputs_test))]
+
+        # Plot a few examples
+        num_examples = 2
+        fig_1, axes = plt.subplots(1, num_examples, figsize=(12, 3))
+        for i, ax in enumerate(axes):
+            ax.imshow(X_test[:, i, None].reshape(28, 28), cmap="gray")
+            ax.set_title(f"Predicted: {Y_test[i]}")
+
+        fig_1.tight_layout()
+        # fig_1.savefig("reulst.png")
+        return animation ,fig_1 
+
+
+
+   
 
 if __name__ == "__main__":
 
     np.random.seed(1337)
     random.seed(1337)
-    X_train , y_train = initialize_data(n_samples=100 ,noise=0.1)
-    model = MLP(2, [16,16,1]) # 2-layer neural network
-    # model = SparseMLP(nin=2, nouts=[16, 16, 1], sparsities=[0.,0.9,0.8]) # 2-layer neural network
-    print("number of parameters", len(model.parameters()))
-    models = Optimization_training_progress_realtime(num_epoch=30,model=model , x_train=X_train ,y_train=y_train)
-    create_animation(models, X_train, y_train)
+    models = Optimization_training_progress_realtime(
+        Task="Sparsity",num_epoch=5, learning_rate=0.002 ,
+        num_layer=2,values_wieghts=16)
 
     
 

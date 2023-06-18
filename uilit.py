@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import os
 from IPython.display import clear_output
 from core.engine import Value
+from sklearn.datasets import make_moons, make_blobs
+
 clear_output()
 
 # Iterate through the first 6 images
@@ -36,6 +38,13 @@ def loading_df_to_numpy(path_file):
     Y_test_split = Y_train[:5]
 
     return X_train_split, X_test_split, Y_train_split, Y_test_split
+
+def initialize_data(n_samples: int, noise: float):
+    input_data, Target = make_moons(n_samples=n_samples, noise=noise)
+
+    Target = Target * 2 - 1  # make y be -1 or 14
+    # fig.close()
+    return input_data, Target
 
 
 def plot_sample(DATA_TRAIN,DATA_LABEL):

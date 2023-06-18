@@ -1,0 +1,3 @@
+Task,Number of Epochs,Learning Rate,Number of Layers,Values for Weights,output 0,output 1,flag,username,timestamp
+,6,0.315,2,16,,,,,2023-06-18 20:14:40.179677
+Classification,10,0.275,2,15,/home/black/GitLab/netGrad/flagged/output 0/tmp4izb_9iu.json,/home/black/GitLab/netGrad/flagged/output 1/tmpxs0_lv52.json,,,2023-06-18 22:29:45.027882
