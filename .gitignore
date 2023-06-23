@@ -1,8 +1,15 @@
 #env
 .git/
+.ipynb_checkpoints/
 digit-recognizer/
+tiny
 img/
 assets/
+flagged/
 .vscode/
 .ipynb_checkpoints/
-app/
+app/assets/
+
+dev/
+Nano-AutoGrad/__pycache__
+__pycache__/

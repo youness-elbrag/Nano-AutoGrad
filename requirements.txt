@@ -10,3 +10,6 @@ ipython
 nbformat>=4.2.0
 ipywidgets>=7.0.0
 imageio
+graphviz
+gradio
+# Nano-AutoGrad
