@@ -2,7 +2,16 @@ import torch
 from autograd.core.engine import Value
 
 def test_sanity_check():
+    """
+    Test the sanity check operations in the core engine implementation.
 
+    This test creates a computation graph using `Value` objects and performs forward and backward passes.
+    The same computation graph is replicated using PyTorch tensors, and forward and backward passes are performed.
+    The test asserts the equality of the computed values and gradients.
+
+    Raises:
+        AssertionError: If the computed values or gradients differ beyond the specified tolerance.
+    """
     x = Value(-4.0)
     z = 2 * x + 2 + x
     q = z.relu() + z * x
@@ -25,8 +34,18 @@ def test_sanity_check():
     # backward pass went well
     assert xmg.grad == xpt.grad.item()
 
-def test_more_ops():
 
+def test_more_ops():
+    """
+    Test additional operations in the core engine implementation.
+
+    This test creates a computation graph using `Value` objects and performs forward and backward passes.
+    The same computation graph is replicated using PyTorch tensors, and forward and backward passes are performed.
+    The test asserts the equality of the computed values and gradients.
+
+    Raises:
+        AssertionError: If the computed values or gradients differ beyond the specified tolerance.
+    """
     a = Value(-4.0)
     b = Value(2.0)
     c = a + b

@@ -10,7 +10,7 @@ class LRScheduler:
         self.optimizer = optimizer
         self.base_lr = optimizer.lr
         self.last_epoch = last_epoch + 1
-    
+
     def step(self):
         """
         Update the learning rate based on the current epoch.
@@ -36,7 +36,7 @@ class LinearLR(LRScheduler):
             optimizer: The optimizer for which to adjust the learning rate.
             start_factor: The initial learning rate factor.
             end_factor: The final learning rate factor.
-            total_iters: The total number of iterations to reach the final learning rate. 
+            total_iters: The total number of iterations to reach the final learning rate.
             last_epoch: The index of the last epoch.
         """
         super().__init__(optimizer, last_epoch)
@@ -54,4 +54,6 @@ class LinearLR(LRScheduler):
         if self.last_epoch > self.total_iters:
             return self.optimizer.lr
 
-        return self.base_lr * (self.start_factor + (self.end_factor - self.start_factor) * self.last_epoch / self.total_iters)
+        return self.base_lr * (
+            self.start_factor + (self.end_factor - self.start_factor) * self.last_epoch / self.total_iters
+        )

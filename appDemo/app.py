@@ -13,7 +13,7 @@ num_layer_input = gr.inputs.Number(label="Number of Layers")
 values_weights_input = gr.inputs.Number(label="Values for Weights")
 
 
-outputs = [gr.Plot(),gr.Plot()]
+outputs = [gr.Plot(),"video"]
 # Create the Gradio interface
 iface = gr.Interface(
     fn=Optimization_training_progress_realtime,

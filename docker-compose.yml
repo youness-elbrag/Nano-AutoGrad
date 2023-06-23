@@ -1,0 +1,18 @@
+version: "3.9"
+
+# Define the Argments services APP to run
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      args:
+        - DEV=true
+    ports: 
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    restart: always 
+    command: >
+      sh -c "python app.py"

@@ -1,4 +1,4 @@
-name: Upload Python Package
+name: CI/CD intergration Upload Python Package 
 
 on:
   release:
@@ -29,3 +29,74 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
+
+  Docker-Setup:
+
+      needs: deploy
+      runs-on: ubuntu-20.04
+      steps:
+        -
+          name: Checkout
+          uses: actions/checkout@v3
+        -
+          name: Set up QEMU
+          uses: docker/setup-qemu-action@v2
+        -
+          name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v2
+
+        # Auth to docker hub     
+        -
+          name: Docker-login
+          uses: docker/login-action@v2
+          with:
+            username: ${{ secrets.DOCKERHUB_USER }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
+        # Buidling and pushing image to docker repo       
+        - 
+          name: build and push images to DOCKERHUB
+          uses: docker/build-push-action@v4
+          with:
+            context: .
+            push: true
+            tags: younessbg/app:latset
+            secrets: |
+              GIT_AUTH_TOKEN= ${{ secrets.GIT_AUTH }}
+              
+
+  GitHub-Container-Registry:
+      needs: ["deploy","Docker-Setup"]
+      runs-on: ubuntu-20.04
+      permissions:
+        contents: read
+        packages: write
+
+      steps:
+        -
+          name: Checkout
+          uses: actions/checkout@v3
+        - 
+          name: login to GitHub Container Registry
+          uses: docker/login-action@v2
+          with:
+            registry: ${{ env.REGISTRY }}
+            username: ${{ github.actor }}
+            password: ${{ secrets.GIT_AUTH }}
+        - 
+          name: Extract metadata (tags, labels) for Docker
+          id: meta
+          uses: docker/metadata-action@v2
+          with:
+            images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+        - 
+          name: Build and push Docker image
+          uses: docker/build-push-action@v2
+          with:
+            context: .
+            push: true
+            tags: ghcr.io/deep-matter/app:latset
+            labels: 'latset'
+
+
+

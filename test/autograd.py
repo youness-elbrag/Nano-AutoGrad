@@ -3,6 +3,14 @@ import torch
 
 
 def test_model():
+    """
+    Test the model implemented using TinyTorch against a corresponding model implemented using PyTorch.
+
+    This test compares the loss values and gradients obtained from both models and asserts their closeness.
+
+    Raises:
+        AssertionError: If the loss values or gradients differ beyond the specified tolerance.
+    """
     class Model(tiny.nn.Module):
         def __init__(self):
             super().__init__()

@@ -1,9 +1,8 @@
 import random
 import numpy as np
-from core.engine import Value
-from core.nn import Neuron, Layer, MLP
-from core.Graph import draw_dot
-
+from autograd.core.engine import Value
+from autograd.core.nn import Neuron, Layer, MLP
+from autograd.core.Graph import draw_dot
 import time 
 from graphviz import Digraph
 import imageio
@@ -21,7 +20,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation ,FFMpegWriter
 import matplotlib.pyplot as plt
 from uilit import *
-os.environ["PATH"] += os.pathsep + 'app/lib/Python 3.11/site-packages/graphviz'
+os.environ["PATH"] += os.pathsep + './dev/lib/Python 3.11/site-packages/graphviz'
 
 path_data = 'digit-recognizer/data/'
 
@@ -211,6 +210,7 @@ def Optimization_training_progress_realtime(Task,num_epoch, learning_rate ,num_l
                 ax.set_title(f"Predicted: {Y_test[i]}")
                 ax.axis('off')
         fig_1.tight_layout()
+        
         lin_ani = FuncAnimation(fig_1, animate, frames=len(X_test), interval=200)
         FFwriter = FFMpegWriter(fps=10)
 
