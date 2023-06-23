@@ -1,6 +1,8 @@
 #env
 .git/
+.ipynb_checkpoints/
 digit-recognizer/
+tiny
 img/
 assets/
 flagged/
