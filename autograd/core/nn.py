@@ -1,6 +1,6 @@
 import random
 from .engine import Value
-
+import math 
 class Module:
 
     def zero_grad(self):

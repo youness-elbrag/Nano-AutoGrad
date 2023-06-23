@@ -1,5 +1,6 @@
 import random
 from .engine import Value
+import math
 
 class Module:
 
