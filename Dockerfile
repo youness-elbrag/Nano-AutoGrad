@@ -10,7 +10,7 @@ WORKDIR /app
 RUN apt-get update && \
     if [ $DEV = "true" ]; \
         then pip3 install -r requirements.txt && \
-    rm -rf /app/requirements.txt /app/packages.txt ; \
+    rm -rf /app/requirements.txt ; \
     fi && \ 
     rm -rf /var/lib/apt/lists/* && \
     pip install --upgrade pip

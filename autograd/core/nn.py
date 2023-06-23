@@ -1,5 +1,5 @@
 import random
-from core.engine import Value
+from .engine import Value
 
 class Module:
 

@@ -1,16 +1,18 @@
+from init import *
 import numpy as np 
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+from PIL import Image
+
 import matplotlib.animation as animation
 from matplotlib.animation import FuncAnimation
 from IPython.display import clear_output
-from core.engine import Value
+from autograd.core.engine import Value
 from sklearn.datasets import make_moons, make_blobs
 import plotly.graph_objects as go
 import plotly.io as pio
 import imageio
-from IPython.display import Image, display
 
 clear_output()
 
@@ -111,45 +113,23 @@ def dboundary(model):
   ax.set_ylim(yy.min(), yy.max())
   return  fig,ax,ln
 
-
 def graph_trace(Path, nframes, interval):
-    fig = go.Figure()
+    animation_frames = []
+    # Load the first image to get its dimensions and color mode
+    first_frame_path = f"assets/{Path}_0.png"
+    first_image = Image.open(first_frame_path)
+    width, height = first_image.size
+    color_mode = first_image.mode
 
-    def add_frame(index):
-        frame_path = f"assets/{Path}_{index}.png"
-        fig.add_layout_image(
-            source=frame_path,
-            xref="x",
-            yref="y",
-            x=0,
-            y=1,
-            sizex=1,
-            sizey=1,
-            sizing="contain",
-            opacity=1,
-            layer="below"
-        )
+    # Resize and convert all the images to the same dimensions and color mode
+    resized_width = 900  # Set your desired width
+    resized_height = 700  # Set your desired height
 
     for i in range(nframes):
-        add_frame(i)
-
-    fig.update_layout(
-        xaxis=dict(visible=False),
-        yaxis=dict(visible=False),
-        width=800,
-        height=600,
-        autosize=False,
-        hovermode=False,
-        updatemenus=[dict(type="buttons", showactive=False)],
-    )
+        frame_path = f"assets/{Path}_{i}.png"
+        image = Image.open(frame_path)
+        resized_image = image.resize((resized_width, resized_height)).convert(color_mode)
+        animation_frames.append(resized_image)
 
     animation_path = "out/Graph.mp4"
-    with imageio.get_writer(animation_path, mode="I") as writer:
-        for i in range(nframes):
-            frame_path = f"assets/{Path}_{i}.png"
-            image = imageio.imread(frame_path)
-            writer.append_data(image)
-
-    # Display the animation
-    image_bytes = pio.to_image(fig, format="png")
-    display(Image(image_bytes))
+    imageio.mimsave(animation_path, animation_frames, format="mp4")

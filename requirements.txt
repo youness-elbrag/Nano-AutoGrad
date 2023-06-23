@@ -11,4 +11,5 @@ nbformat>=4.2.0
 ipywidgets>=7.0.0
 imageio
 graphviz
-Nano-AutoGrad
+gradio
+# Nano-AutoGrad

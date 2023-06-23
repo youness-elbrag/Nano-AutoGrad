@@ -1,3 +1,4 @@
+from init import *
 import random
 import numpy as np
 from autograd.core.engine import Value
@@ -55,7 +56,8 @@ def loss(model,X_train , y_train , batch_size=None):
 
 def Optimization_training_progress_realtime(Task,num_epoch, learning_rate ,num_layer,values_wieghts):
     filename = f"assets/plot_res_{num_epoch-1}.png"
-    if os.path.exists(filename):
+    filename_ = f"assets/graph_wights_update_{num_epoch-1}.png"
+    if os.path.exists(filename) or os.path.exists(filename_):
         shutil.rmtree('assets/')
         os.makedirs('assets/')
     # Create empty lists for loss and accuracy
@@ -184,39 +186,46 @@ def Optimization_training_progress_realtime(Task,num_epoch, learning_rate ,num_l
             plt.imshow(im1)
             plt.title(f"Epoch: {i+1}\nLoss: {loss_data[i]:.4f} - Accuracy: {accuracy_data[i]:.4f}")
             plt.xlabel("prediction")
+            plt.axis('off')
+
             fig_2.tight_layout()
 
-        anim_= FuncAnimation(fig_2, animate_predicion, frames=nframes, interval=interval)
-        anim_.save("out/training.gif", writer="imagemagick")
-        # Read the animated GIF
-       # Create the Plotly figure
-        img = "out/training.gif"
+        lin_ani = FuncAnimation(fig_2, animate_predicion, frames=nframes, interval=200)
+        FFwriter = FFMpegWriter(fps=10)
+
+        lin_ani.save('out/training.mp4', writer=FFwriter)
         # Display the animation
      # Show the figure
-        return animation , fig_2
+        return animation ,'out/training.mp4', 'out/Graph.mp4'
 
     if Task in "Classification":
-        # graph_trace("graph_wights_update", nframes,interval)
+        graph_trace("graph_wights_update", nframes,interval)
         inputs_test = [list(map(Value, xrow)) for xrow in X_test]
         predictions = [scorei.data.argmax() for scorei in list(map(model, inputs_test))]
 
         # Plot a few examples
         num_examples = 8
-        fig_1, axes = plt.subplots(4, 4, figsize=(10, 10))
+        fig_1, axes = plt.subplots(2, 2, figsize=(12, 6))
         fig_1.subplots_adjust(hspace=0.4, wspace=0.4)
+
         def animate(i):
-            for i, ax in enumerate(axes.flatten()):
-                ax.imshow(X_test[:, i,None ], cmap="gray")
-                ax.set_title(f"Predicted: {Y_test[i]}")
-                ax.axis('off')
+            for j, ax in enumerate(axes.flatten()):
+                if j < num_examples:
+                    random_index = random.randint(0, X_test.shape[1] - 1)
+                    ax.imshow(X_test[:, random_index, None].reshape(28, 28), cmap="gray")
+                    ax.set_title(f"Predicted: {Y_test[random_index]}")
+                    ax.axis('off')
+                else:
+                    ax.axis('off')
+
         fig_1.tight_layout()
-        
-        lin_ani = FuncAnimation(fig_1, animate, frames=len(X_test), interval=200)
+
+        lin_ani = FuncAnimation(fig_1, animate, frames=nframes, interval=200)
         FFwriter = FFMpegWriter(fps=10)
 
         lin_ani.save('out/Predicted.mp4', writer=FFwriter)
         # fig_1.savefig("reulst.png")
-        return animation ,fig_1 
+        return animation , 'out/Predicted.mp4', 'out/Graph.mp4'
 
 
 
@@ -227,7 +236,7 @@ if __name__ == "__main__":
     np.random.seed(1337)
     random.seed(1337)
     models = Optimization_training_progress_realtime(
-        Task="Classification",num_epoch=4, learning_rate=0.002 ,
+        Task="Sparsity",num_epoch=5, learning_rate=0.002 ,
         num_layer=2,values_wieghts=4)
 
     
