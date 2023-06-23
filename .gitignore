@@ -9,3 +9,5 @@ flagged/
 .vscode/
 .ipynb_checkpoints/
 app/
+Nano-AutoGrad/__pycache__
+__pycache__/
