@@ -2,9 +2,15 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import matplotlib.animation as animation
+from matplotlib.animation import FuncAnimation
 from IPython.display import clear_output
 from core.engine import Value
 from sklearn.datasets import make_moons, make_blobs
+import plotly.graph_objects as go
+import plotly.io as pio
+import imageio
+from IPython.display import Image, display
 
 clear_output()
 
@@ -104,3 +110,46 @@ def dboundary(model):
   ax.set_xlim(xx.min(), xx.max())
   ax.set_ylim(yy.min(), yy.max())
   return  fig,ax,ln
+
+
+def graph_trace(Path, nframes, interval):
+    fig = go.Figure()
+
+    def add_frame(index):
+        frame_path = f"assets/{Path}_{index}.png"
+        fig.add_layout_image(
+            source=frame_path,
+            xref="x",
+            yref="y",
+            x=0,
+            y=1,
+            sizex=1,
+            sizey=1,
+            sizing="contain",
+            opacity=1,
+            layer="below"
+        )
+
+    for i in range(nframes):
+        add_frame(i)
+
+    fig.update_layout(
+        xaxis=dict(visible=False),
+        yaxis=dict(visible=False),
+        width=800,
+        height=600,
+        autosize=False,
+        hovermode=False,
+        updatemenus=[dict(type="buttons", showactive=False)],
+    )
+
+    animation_path = "out/Graph.mp4"
+    with imageio.get_writer(animation_path, mode="I") as writer:
+        for i in range(nframes):
+            frame_path = f"assets/{Path}_{i}.png"
+            image = imageio.imread(frame_path)
+            writer.append_data(image)
+
+    # Display the animation
+    image_bytes = pio.to_image(fig, format="png")
+    display(Image(image_bytes))

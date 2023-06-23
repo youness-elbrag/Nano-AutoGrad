@@ -3,6 +3,7 @@
 digit-recognizer/
 img/
 assets/
+flagged/
 .vscode/
 .ipynb_checkpoints/
 app/

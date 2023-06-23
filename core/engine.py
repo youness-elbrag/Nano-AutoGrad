@@ -6,11 +6,12 @@ import random
 class Value:
     """ stores a single scalar value and its gradient """
 
-    def __init__(self, data=None, _children=(), _op=''):
+    def __init__(self, data=None, _children=(), _op='',label=''):
         if data is None:
           data = random.uniform(-1,1)
         self.data = data
         self.grad = 0
+        self.label=label
         # internal variables used for autograd graph construction
         self._backward = lambda *a, **k: None
         self._prev = set(_children)

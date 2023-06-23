@@ -2,24 +2,26 @@ import random
 import numpy as np
 from core.engine import Value
 from core.nn import Neuron, Layer, MLP
-from core.SparsityNN import SparseMLP
+from core.Graph import draw_dot
+
 import time 
+from graphviz import Digraph
 import imageio
 from functools import partial
 import matplotlib.animation as animation
 import shutil
 from IPython.display import HTML
-
+import os
 import pandas as pd
 import plotly.subplots as sp
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+from matplotlib.animation import FuncAnimation ,FFMpegWriter
 import matplotlib.pyplot as plt
-import os
 from uilit import *
+os.environ["PATH"] += os.pathsep + 'app/lib/Python 3.11/site-packages/graphviz'
 
 path_data = 'digit-recognizer/data/'
 
@@ -50,7 +52,7 @@ def loss(model,X_train , y_train , batch_size=None):
     
     # also get accuracy
     accuracy = [(yi > 0) == (scorei.data > 0) for yi, scorei in zip(yb, scores)]
-    return total_loss, sum(accuracy) / len(accuracy)
+    return total_loss, sum(accuracy) / len(accuracy) ,scores
 
 def Optimization_training_progress_realtime(Task,num_epoch, learning_rate ,num_layer,values_wieghts):
     filename = f"assets/plot_res_{num_epoch-1}.png"
@@ -95,15 +97,17 @@ def Optimization_training_progress_realtime(Task,num_epoch, learning_rate ,num_l
     elif Task in "Classification":
         FILES , _  = extract_path_df(path_data,10)
         X_train, X_test, Y_train, Y_test = loading_df_to_numpy(FILES[0])
-    for k in range(num_epoch):
+    for k in range(int(num_epoch)):
         # Forward pass
-        total_loss, acc = loss(model, X_train, Y_train, batch_size=None)
+        total_loss, acc,scores = loss(model, X_train, Y_train, batch_size=None)
 
         # Backward pass
         model.zero_grad()
         total_loss.backward()
+        draw_dot(model(scores),f'graph_wights_update_{k}')
 
         # Update (SGD)
+
         learning_rate = 1.0 - 0.9 * k / 100
 
         for p in model.parameters():
@@ -146,8 +150,8 @@ def Optimization_training_progress_realtime(Task,num_epoch, learning_rate ,num_l
             plt.savefig(f'assets/plot_res_{k}.png')
      # Add frames to animation
     fig.frames = frames
-    nframes = num_epoch
-    interval = num_epoch * 2
+    nframes = int(num_epoch)
+    interval = int(num_epoch) * 2
 
     # Create animation
     animation = go.Figure(fig)
@@ -174,35 +178,43 @@ def Optimization_training_progress_realtime(Task,num_epoch, learning_rate ,num_l
     # Save animation as GIF
         
     if Task in "Sparsity":
-        fig_1 = plt.figure()
+        graph_trace("graph_wights_update", nframes,interval)
+        fig_2 = plt.figure()
         def animate_predicion(i):
             im1 = plt.imread(f"assets/plot_res_{i}.png")
             plt.imshow(im1)
             plt.title(f"Epoch: {i+1}\nLoss: {loss_data[i]:.4f} - Accuracy: {accuracy_data[i]:.4f}")
             plt.xlabel("prediction")
-            fig_1.tight_layout()
+            fig_2.tight_layout()
 
-        anim_= FuncAnimation(fig_1, animate_predicion, frames=nframes, interval=interval)
+        anim_= FuncAnimation(fig_2, animate_predicion, frames=nframes, interval=interval)
         anim_.save("out/training.gif", writer="imagemagick")
         # Read the animated GIF
        # Create the Plotly figure
         img = "out/training.gif"
         # Display the animation
      # Show the figure
-        return animation , img
+        return animation , fig_2
 
     if Task in "Classification":
+        # graph_trace("graph_wights_update", nframes,interval)
         inputs_test = [list(map(Value, xrow)) for xrow in X_test]
         predictions = [scorei.data.argmax() for scorei in list(map(model, inputs_test))]
 
         # Plot a few examples
-        num_examples = 2
-        fig_1, axes = plt.subplots(1, num_examples, figsize=(12, 3))
-        for i, ax in enumerate(axes):
-            ax.imshow(X_test[:, i, None].reshape(28, 28), cmap="gray")
-            ax.set_title(f"Predicted: {Y_test[i]}")
-
+        num_examples = 8
+        fig_1, axes = plt.subplots(4, 4, figsize=(10, 10))
+        fig_1.subplots_adjust(hspace=0.4, wspace=0.4)
+        def animate(i):
+            for i, ax in enumerate(axes.flatten()):
+                ax.imshow(X_test[:, i,None ], cmap="gray")
+                ax.set_title(f"Predicted: {Y_test[i]}")
+                ax.axis('off')
         fig_1.tight_layout()
+        lin_ani = FuncAnimation(fig_1, animate, frames=len(X_test), interval=200)
+        FFwriter = FFMpegWriter(fps=10)
+
+        lin_ani.save('out/Predicted.mp4', writer=FFwriter)
         # fig_1.savefig("reulst.png")
         return animation ,fig_1 
 
@@ -215,8 +227,8 @@ if __name__ == "__main__":
     np.random.seed(1337)
     random.seed(1337)
     models = Optimization_training_progress_realtime(
-        Task="Sparsity",num_epoch=5, learning_rate=0.002 ,
-        num_layer=2,values_wieghts=16)
+        Task="Classification",num_epoch=4, learning_rate=0.002 ,
+        num_layer=2,values_wieghts=4)
 
     
 

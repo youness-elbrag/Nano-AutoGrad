@@ -12,9 +12,8 @@ learning_rate_input = gr.inputs.Slider(minimum=0.01, maximum=1.0, default=0.1, l
 num_layer_input = gr.inputs.Number(label="Number of Layers")
 values_weights_input = gr.inputs.Number(label="Values for Weights")
 
-gif_output = gr.File(label="Training GIF")
 
-outputs = [gr.Plot(),"image"]
+outputs = [gr.Plot(),gr.Plot()]
 # Create the Gradio interface
 iface = gr.Interface(
     fn=Optimization_training_progress_realtime,
@@ -22,7 +21,6 @@ iface = gr.Interface(
     outputs=outputs,
     title="Optimization Training Progress",
     description="Real-time visualization of training progress",
-    theme="dark"
 )
 
-iface.launch()
+iface.launch(share=True)
