@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="nano-autograd",
+    name="tinyTroch",
     version="0.1.0",
     author="Youness EL BRAG",
     author_email="younsselbrag@gmail.com",
