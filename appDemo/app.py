@@ -47,4 +47,4 @@ if __name__ == '__main__':
         interface_list=[iface_file, iface_webcam],
         tab_names=["Classification Task", "Sparsity Task"]
         
-    ).launch(enable_queue=True)
+    ).launch(enable_queue=True,share=True)
