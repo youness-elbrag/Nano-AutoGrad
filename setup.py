@@ -11,7 +11,7 @@ with open(target_dir +"/README.md", "r") as fh:
 
 setuptools.setup(
     name="nano-autograds",
-    version="0.1.0",
+    version="0.1.1",
     author="Youness EL BRAG",
     author_email="younsselbrag@gmail.com",
     description="A tinyTroch scalar-Engine Nano-autograd a Micro-Framework with a small PyTorch-like neural network library on top.",
