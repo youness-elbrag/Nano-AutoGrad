@@ -229,6 +229,7 @@ def Optimization_training_progress_realtime(Task,num_epoch, learning_rate ,num_l
 
 
 
+
    
 
 if __name__ == "__main__":

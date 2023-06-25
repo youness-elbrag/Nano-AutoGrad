@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="python" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>autograd package &mdash; Nano-AutoGrad 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Nano-AutoGrad
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">autograd package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#module-autograd">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Nano-AutoGrad</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">autograd package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/autograd.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="autograd-package">
+<h1>autograd package<a class="headerlink" href="#autograd-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="autograd.core.html">autograd.core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autograd.core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.core.html#module-autograd.core.Graph">autograd.core.Graph module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.Graph.draw_dot"><code class="docutils literal notranslate"><span class="pre">draw_dot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.Graph.trace"><code class="docutils literal notranslate"><span class="pre">trace()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.core.html#module-autograd.core.Spares_nn">autograd.core.Spares_nn module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.Spares_nn.Module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.Spares_nn.Module.parameters"><code class="docutils literal notranslate"><span class="pre">Module.parameters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.Spares_nn.Module.zero_grad"><code class="docutils literal notranslate"><span class="pre">Module.zero_grad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.Spares_nn.SparseLayer"><code class="docutils literal notranslate"><span class="pre">SparseLayer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.Spares_nn.SparseLayer.parameters"><code class="docutils literal notranslate"><span class="pre">SparseLayer.parameters()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.Spares_nn.SparseMLP"><code class="docutils literal notranslate"><span class="pre">SparseMLP</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.Spares_nn.SparseMLP.parameters"><code class="docutils literal notranslate"><span class="pre">SparseMLP.parameters()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.Spares_nn.SparseNeuron"><code class="docutils literal notranslate"><span class="pre">SparseNeuron</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.Spares_nn.SparseNeuron.parameters"><code class="docutils literal notranslate"><span class="pre">SparseNeuron.parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.core.html#module-autograd.core.engine">autograd.core.engine module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.engine.Value"><code class="docutils literal notranslate"><span class="pre">Value</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.engine.Value.backward"><code class="docutils literal notranslate"><span class="pre">Value.backward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.engine.Value.relu"><code class="docutils literal notranslate"><span class="pre">Value.relu()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.engine.Value.softmax"><code class="docutils literal notranslate"><span class="pre">Value.softmax()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.core.html#module-autograd.core.nn">autograd.core.nn module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.nn.Layer"><code class="docutils literal notranslate"><span class="pre">Layer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.nn.Layer.parameters"><code class="docutils literal notranslate"><span class="pre">Layer.parameters()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.nn.MLP"><code class="docutils literal notranslate"><span class="pre">MLP</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.nn.MLP.parameters"><code class="docutils literal notranslate"><span class="pre">MLP.parameters()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.nn.Module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.nn.Module.parameters"><code class="docutils literal notranslate"><span class="pre">Module.parameters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.nn.Module.zero_grad"><code class="docutils literal notranslate"><span class="pre">Module.zero_grad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.core.html#autograd.core.nn.Neuron"><code class="docutils literal notranslate"><span class="pre">Neuron</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.core.html#autograd.core.nn.Neuron.parameters"><code class="docutils literal notranslate"><span class="pre">Neuron.parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.core.html#module-autograd.core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autograd.torch.html">autograd.torch package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html">autograd.torch.nn package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.nn.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.nn.html#module-autograd.torch.nn.functional">autograd.torch.nn.functional module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.nn.html#module-autograd.torch.nn.module">autograd.torch.nn.module module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.nn.html#module-autograd.torch.nn">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.optim.html">autograd.torch.optim package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.optim.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.optim.html#module-autograd.torch.optim.lr_scheduler">autograd.torch.optim.lr_scheduler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.optim.html#module-autograd.torch.optim.optimizer">autograd.torch.optim.optimizer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.optim.html#module-autograd.torch.optim">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.html#module-autograd.torch.init">autograd.torch.init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.html#module-autograd.torch.tensor">autograd.torch.tensor module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor"><code class="docutils literal notranslate"><span class="pre">Tensor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.T"><code class="docutils literal notranslate"><span class="pre">Tensor.T</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.accum_grad"><code class="docutils literal notranslate"><span class="pre">Tensor.accum_grad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.backward"><code class="docutils literal notranslate"><span class="pre">Tensor.backward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.broadcast_axis"><code class="docutils literal notranslate"><span class="pre">Tensor.broadcast_axis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.exp"><code class="docutils literal notranslate"><span class="pre">Tensor.exp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.grad_enabled"><code class="docutils literal notranslate"><span class="pre">Tensor.grad_enabled</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.log"><code class="docutils literal notranslate"><span class="pre">Tensor.log()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.log_softmax"><code class="docutils literal notranslate"><span class="pre">Tensor.log_softmax()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.relu"><code class="docutils literal notranslate"><span class="pre">Tensor.relu()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.sigmoid"><code class="docutils literal notranslate"><span class="pre">Tensor.sigmoid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.sum"><code class="docutils literal notranslate"><span class="pre">Tensor.sum()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.Tensor.tanh"><code class="docutils literal notranslate"><span class="pre">Tensor.tanh()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.html#autograd.torch.tensor.no_grad"><code class="docutils literal notranslate"><span class="pre">no_grad</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.html#module-autograd.torch">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-autograd">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-autograd" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Youness El Brag.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

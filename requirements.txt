@@ -12,4 +12,5 @@ ipywidgets>=7.0.0
 imageio
 graphviz
 gradio
-# Nano-AutoGrad
+nano-autograds
+sphinx

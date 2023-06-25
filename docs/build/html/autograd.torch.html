@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="python" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>autograd.torch package &mdash; Nano-AutoGrad 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Nano-AutoGrad
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">autograd.torch package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-autograd.torch.init">autograd.torch.init module</a></li>
+<li><a class="reference internal" href="#module-autograd.torch.tensor">autograd.torch.tensor module</a><ul>
+<li><a class="reference internal" href="#autograd.torch.tensor.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor"><code class="docutils literal notranslate"><span class="pre">Tensor</span></code></a><ul>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.T"><code class="docutils literal notranslate"><span class="pre">Tensor.T</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.accum_grad"><code class="docutils literal notranslate"><span class="pre">Tensor.accum_grad()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.backward"><code class="docutils literal notranslate"><span class="pre">Tensor.backward()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.broadcast_axis"><code class="docutils literal notranslate"><span class="pre">Tensor.broadcast_axis()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.exp"><code class="docutils literal notranslate"><span class="pre">Tensor.exp()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.grad_enabled"><code class="docutils literal notranslate"><span class="pre">Tensor.grad_enabled</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.log"><code class="docutils literal notranslate"><span class="pre">Tensor.log()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.log_softmax"><code class="docutils literal notranslate"><span class="pre">Tensor.log_softmax()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.relu"><code class="docutils literal notranslate"><span class="pre">Tensor.relu()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.sigmoid"><code class="docutils literal notranslate"><span class="pre">Tensor.sigmoid()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.sum"><code class="docutils literal notranslate"><span class="pre">Tensor.sum()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.torch.tensor.Tensor.tanh"><code class="docutils literal notranslate"><span class="pre">Tensor.tanh()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autograd.torch.tensor.no_grad"><code class="docutils literal notranslate"><span class="pre">no_grad</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-autograd.torch">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Nano-AutoGrad</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">autograd.torch package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/autograd.torch.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="autograd-torch-package">
+<h1>autograd.torch package<a class="headerlink" href="#autograd-torch-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="autograd.torch.nn.html">autograd.torch.nn package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.nn.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.nn.html#module-autograd.torch.nn.functional">autograd.torch.nn.functional module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.functional.binary_cross_entropy"><code class="docutils literal notranslate"><span class="pre">binary_cross_entropy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.functional.exp"><code class="docutils literal notranslate"><span class="pre">exp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.functional.huber_loss"><code class="docutils literal notranslate"><span class="pre">huber_loss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.functional.log"><code class="docutils literal notranslate"><span class="pre">log()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.functional.log_softmax"><code class="docutils literal notranslate"><span class="pre">log_softmax()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.functional.mse_loss"><code class="docutils literal notranslate"><span class="pre">mse_loss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.functional.nll_loss"><code class="docutils literal notranslate"><span class="pre">nll_loss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.functional.relu"><code class="docutils literal notranslate"><span class="pre">relu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.functional.sigmoid"><code class="docutils literal notranslate"><span class="pre">sigmoid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.functional.tanh"><code class="docutils literal notranslate"><span class="pre">tanh()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.nn.html#module-autograd.torch.nn.module">autograd.torch.nn.module module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.module.Linear"><code class="docutils literal notranslate"><span class="pre">Linear</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.module.Linear.forward"><code class="docutils literal notranslate"><span class="pre">Linear.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.module.Module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.module.Module.forward"><code class="docutils literal notranslate"><span class="pre">Module.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.module.Module.modules"><code class="docutils literal notranslate"><span class="pre">Module.modules()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.nn.html#autograd.torch.nn.module.Module.parameters"><code class="docutils literal notranslate"><span class="pre">Module.parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.nn.html#module-autograd.torch.nn">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autograd.torch.optim.html">autograd.torch.optim package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.optim.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.optim.html#module-autograd.torch.optim.lr_scheduler">autograd.torch.optim.lr_scheduler module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.optim.html#autograd.torch.optim.lr_scheduler.LRScheduler"><code class="docutils literal notranslate"><span class="pre">LRScheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.optim.html#autograd.torch.optim.lr_scheduler.LRScheduler.get_lr"><code class="docutils literal notranslate"><span class="pre">LRScheduler.get_lr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.optim.html#autograd.torch.optim.lr_scheduler.LRScheduler.step"><code class="docutils literal notranslate"><span class="pre">LRScheduler.step()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.optim.html#autograd.torch.optim.lr_scheduler.LinearLR"><code class="docutils literal notranslate"><span class="pre">LinearLR</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.optim.html#autograd.torch.optim.lr_scheduler.LinearLR.get_lr"><code class="docutils literal notranslate"><span class="pre">LinearLR.get_lr()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.optim.html#module-autograd.torch.optim.optimizer">autograd.torch.optim.optimizer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.optim.html#autograd.torch.optim.optimizer.Optimizer"><code class="docutils literal notranslate"><span class="pre">Optimizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.optim.html#autograd.torch.optim.optimizer.Optimizer.step"><code class="docutils literal notranslate"><span class="pre">Optimizer.step()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.optim.html#autograd.torch.optim.optimizer.Optimizer.zero_grad"><code class="docutils literal notranslate"><span class="pre">Optimizer.zero_grad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autograd.torch.optim.html#autograd.torch.optim.optimizer.SGD"><code class="docutils literal notranslate"><span class="pre">SGD</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autograd.torch.optim.html#autograd.torch.optim.optimizer.SGD.step"><code class="docutils literal notranslate"><span class="pre">SGD.step()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autograd.torch.optim.html#module-autograd.torch.optim">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-autograd.torch.init">
+<span id="autograd-torch-init-module"></span><h2>autograd.torch.init module<a class="headerlink" href="#module-autograd.torch.init" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-autograd.torch.tensor">
+<span id="autograd-torch-tensor-module"></span><h2>autograd.torch.tensor module<a class="headerlink" href="#module-autograd.torch.tensor" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.torch.tensor.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grad_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next_functions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Node" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.torch.tensor.</span></span><span class="sig-name descname"><span class="pre">Tensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.T">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">T</span></span><a class="headerlink" href="#autograd.torch.tensor.Tensor.T" title="Permalink to this definition"></a></dt>
+<dd><p>Return the transpose of the Tensor.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>The transposed Tensor object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.accum_grad">
+<span class="sig-name descname"><span class="pre">accum_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grad</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor.accum_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Gradient accumulation function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gradient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retain_graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor.backward" title="Permalink to this definition"></a></dt>
+<dd><p>Perform backpropagation to compute gradients for all Node objects involved in the computation graph
+and store the gradients in the leaf Tensor nodes requiring gradient computation.</p>
+<p>This method traverses the computation graph, starting from the Node object associated with the current 
+Tensor object and propagating gradients to the previous Node objects using their respective gradient functions.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>gradient: Gradient w.r.t. the tensor. 
+retain: If True, the graph used to compute the grads will be retained, otherwise it will be freed (default: False).</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.broadcast_axis">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">broadcast_axis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape_left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_right</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor.broadcast_axis" title="Permalink to this definition"></a></dt>
+<dd><p>Determine the axes along which broadcasting occurs between two shapes.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>shape_left: Shape of the left tensor.
+shape_right: Shape of the right tensor.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A tuple of two tuples representing the axes along which broadcasting occurs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.exp">
+<span class="sig-name descname"><span class="pre">exp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor.exp" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the exponential of each element in the Tensor.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>The resulting Tensor object representing the exponential.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.grad_enabled">
+<span class="sig-name descname"><span class="pre">grad_enabled</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#autograd.torch.tensor.Tensor.grad_enabled" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.log">
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor.log" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the natural logarithm of each element in the Tensor.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>The resulting Tensor object representing the logarithm.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.log_softmax">
+<span class="sig-name descname"><span class="pre">log_softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor.log_softmax" title="Permalink to this definition"></a></dt>
+<dd><p>Applies a softmax function followed by a logarithm.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dim: The dimension along which to compute the log-softmax (default: -1).</p>
+</dd>
+<dt>Returns:</dt><dd><p>The resulting Tensor object after applying the log-softmax function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.relu">
+<span class="sig-name descname"><span class="pre">relu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor.relu" title="Permalink to this definition"></a></dt>
+<dd><p>Apply the Rectified Linear Unit (ReLU) activation function element-wise.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>The resulting Tensor object after applying ReLU.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.sigmoid">
+<span class="sig-name descname"><span class="pre">sigmoid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor.sigmoid" title="Permalink to this definition"></a></dt>
+<dd><p>Apply the sigmoid activation function element-wise.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>The resulting Tensor object after applying the sigmoid function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.sum">
+<span class="sig-name descname"><span class="pre">sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor.sum" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the sum of elements in the Tensor.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dim: The dimension or dimensions to reduce. If None, all dimensions are reduced (optional).
+keepdim: If True the axes which are reduced are left in the result as dimensions with size 1 (default: False).</p>
+</dd>
+<dt>Returns:</dt><dd><p>The resulting Tensor object representing the sum.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.torch.tensor.Tensor.tanh">
+<span class="sig-name descname"><span class="pre">tanh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.torch.tensor.Tensor.tanh" title="Permalink to this definition"></a></dt>
+<dd><p>Apply the hyperbolic tangent (tanh) activation function element-wise.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>The resulting Tensor object after applying the tanh function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.torch.tensor.no_grad">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.torch.tensor.</span></span><span class="sig-name descname"><span class="pre">no_grad</span></span><a class="headerlink" href="#autograd.torch.tensor.no_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+</dd></dl>
+
+</section>
+<section id="module-autograd.torch">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-autograd.torch" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Youness El Brag.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

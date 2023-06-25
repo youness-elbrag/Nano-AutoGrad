@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="python" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>autograd.core package &mdash; Nano-AutoGrad 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Nano-AutoGrad
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">autograd.core package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-autograd.core.Graph">autograd.core.Graph module</a><ul>
+<li><a class="reference internal" href="#autograd.core.Graph.draw_dot"><code class="docutils literal notranslate"><span class="pre">draw_dot()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.core.Graph.trace"><code class="docutils literal notranslate"><span class="pre">trace()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-autograd.core.Spares_nn">autograd.core.Spares_nn module</a><ul>
+<li><a class="reference internal" href="#autograd.core.Spares_nn.Module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a><ul>
+<li><a class="reference internal" href="#autograd.core.Spares_nn.Module.parameters"><code class="docutils literal notranslate"><span class="pre">Module.parameters()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.core.Spares_nn.Module.zero_grad"><code class="docutils literal notranslate"><span class="pre">Module.zero_grad()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autograd.core.Spares_nn.SparseLayer"><code class="docutils literal notranslate"><span class="pre">SparseLayer</span></code></a><ul>
+<li><a class="reference internal" href="#autograd.core.Spares_nn.SparseLayer.parameters"><code class="docutils literal notranslate"><span class="pre">SparseLayer.parameters()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autograd.core.Spares_nn.SparseMLP"><code class="docutils literal notranslate"><span class="pre">SparseMLP</span></code></a><ul>
+<li><a class="reference internal" href="#autograd.core.Spares_nn.SparseMLP.parameters"><code class="docutils literal notranslate"><span class="pre">SparseMLP.parameters()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autograd.core.Spares_nn.SparseNeuron"><code class="docutils literal notranslate"><span class="pre">SparseNeuron</span></code></a><ul>
+<li><a class="reference internal" href="#autograd.core.Spares_nn.SparseNeuron.parameters"><code class="docutils literal notranslate"><span class="pre">SparseNeuron.parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-autograd.core.engine">autograd.core.engine module</a><ul>
+<li><a class="reference internal" href="#autograd.core.engine.Value"><code class="docutils literal notranslate"><span class="pre">Value</span></code></a><ul>
+<li><a class="reference internal" href="#autograd.core.engine.Value.backward"><code class="docutils literal notranslate"><span class="pre">Value.backward()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.core.engine.Value.relu"><code class="docutils literal notranslate"><span class="pre">Value.relu()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.core.engine.Value.softmax"><code class="docutils literal notranslate"><span class="pre">Value.softmax()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-autograd.core.nn">autograd.core.nn module</a><ul>
+<li><a class="reference internal" href="#autograd.core.nn.Layer"><code class="docutils literal notranslate"><span class="pre">Layer</span></code></a><ul>
+<li><a class="reference internal" href="#autograd.core.nn.Layer.parameters"><code class="docutils literal notranslate"><span class="pre">Layer.parameters()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autograd.core.nn.MLP"><code class="docutils literal notranslate"><span class="pre">MLP</span></code></a><ul>
+<li><a class="reference internal" href="#autograd.core.nn.MLP.parameters"><code class="docutils literal notranslate"><span class="pre">MLP.parameters()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autograd.core.nn.Module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a><ul>
+<li><a class="reference internal" href="#autograd.core.nn.Module.parameters"><code class="docutils literal notranslate"><span class="pre">Module.parameters()</span></code></a></li>
+<li><a class="reference internal" href="#autograd.core.nn.Module.zero_grad"><code class="docutils literal notranslate"><span class="pre">Module.zero_grad()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autograd.core.nn.Neuron"><code class="docutils literal notranslate"><span class="pre">Neuron</span></code></a><ul>
+<li><a class="reference internal" href="#autograd.core.nn.Neuron.parameters"><code class="docutils literal notranslate"><span class="pre">Neuron.parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-autograd.core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Nano-AutoGrad</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">autograd.core package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/autograd.core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="autograd-core-package">
+<h1>autograd.core package<a class="headerlink" href="#autograd-core-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-autograd.core.Graph">
+<span id="autograd-core-graph-module"></span><h2>autograd.core.Graph module<a class="headerlink" href="#module-autograd.core.Graph" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="autograd.core.Graph.draw_dot">
+<span class="sig-prename descclassname"><span class="pre">autograd.core.Graph.</span></span><span class="sig-name descname"><span class="pre">draw_dot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.Graph.draw_dot" title="Permalink to this definition"></a></dt>
+<dd><p>Draw the computation graph using graphviz.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>root: The root Value object representing the starting point of the graph.
+graph_name: The name of the graph (used as the filename).</p>
+</dd>
+<dt>Returns:</dt><dd><p>A Digraph object representing the computation graph.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="autograd.core.Graph.trace">
+<span class="sig-prename descclassname"><span class="pre">autograd.core.Graph.</span></span><span class="sig-name descname"><span class="pre">trace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.Graph.trace" title="Permalink to this definition"></a></dt>
+<dd><p>Trace the computation graph starting from the root node.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>root: The root Value object representing the starting point of the graph.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A tuple containing sets of nodes and edges in the graph.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-autograd.core.Spares_nn">
+<span id="autograd-core-spares-nn-module"></span><h2>autograd.core.Spares_nn module<a class="headerlink" href="#module-autograd.core.Spares_nn" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.core.Spares_nn.Module">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.core.Spares_nn.</span></span><span class="sig-name descname"><span class="pre">Module</span></span><a class="headerlink" href="#autograd.core.Spares_nn.Module" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.Spares_nn.Module.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.Spares_nn.Module.parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of all parameters in the module.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.Spares_nn.Module.zero_grad">
+<span class="sig-name descname"><span class="pre">zero_grad</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.Spares_nn.Module.zero_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Set the gradients of all parameters in the module to zero.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.core.Spares_nn.SparseLayer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.core.Spares_nn.</span></span><span class="sig-name descname"><span class="pre">SparseLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparsity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.Spares_nn.SparseLayer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#autograd.core.Spares_nn.Module" title="autograd.core.Spares_nn.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.Spares_nn.SparseLayer.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.Spares_nn.SparseLayer.parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of all parameters in the sparse layer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.core.Spares_nn.SparseMLP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.core.Spares_nn.</span></span><span class="sig-name descname"><span class="pre">SparseMLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nouts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparsities</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.Spares_nn.SparseMLP" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#autograd.core.Spares_nn.Module" title="autograd.core.Spares_nn.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.Spares_nn.SparseMLP.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.Spares_nn.SparseMLP.parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of all parameters in the sparse MLP.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.core.Spares_nn.SparseNeuron">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.core.Spares_nn.</span></span><span class="sig-name descname"><span class="pre">SparseNeuron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparsity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonlin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.Spares_nn.SparseNeuron" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#autograd.core.Spares_nn.Module" title="autograd.core.Spares_nn.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.Spares_nn.SparseNeuron.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.Spares_nn.SparseNeuron.parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of all parameters in the sparse neuron.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-autograd.core.engine">
+<span id="autograd-core-engine-module"></span><h2>autograd.core.engine module<a class="headerlink" href="#module-autograd.core.engine" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.core.engine.Value">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.core.engine.</span></span><span class="sig-name descname"><span class="pre">Value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_children</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_op</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.engine.Value" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Stores a single scalar value and its gradient.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.engine.Value.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keep_graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.engine.Value.backward" title="Permalink to this definition"></a></dt>
+<dd><p>Perform backpropagation to compute the gradients.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>keep_graph: Whether to keep the computational graph for higher-order gradients.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.engine.Value.relu">
+<span class="sig-name descname"><span class="pre">relu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.engine.Value.relu" title="Permalink to this definition"></a></dt>
+<dd><p>Apply the rectified linear unit (ReLU) activation function to the Value object.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>A new Value object representing the output of ReLU.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.engine.Value.softmax">
+<span class="sig-name descname"><span class="pre">softmax</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.engine.Value.softmax" title="Permalink to this definition"></a></dt>
+<dd><p>Apply the softmax activation function to the Value object.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>A new Value object representing the output of softmax.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-autograd.core.nn">
+<span id="autograd-core-nn-module"></span><h2>autograd.core.nn module<a class="headerlink" href="#module-autograd.core.nn" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.core.nn.Layer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.core.nn.</span></span><span class="sig-name descname"><span class="pre">Layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nout</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.nn.Layer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#autograd.core.nn.Module" title="autograd.core.nn.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.nn.Layer.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.nn.Layer.parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of all parameters in the layer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.core.nn.MLP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.core.nn.</span></span><span class="sig-name descname"><span class="pre">MLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nouts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.nn.MLP" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#autograd.core.nn.Module" title="autograd.core.nn.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.nn.MLP.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.nn.MLP.parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of all parameters in the MLP.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.core.nn.Module">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.core.nn.</span></span><span class="sig-name descname"><span class="pre">Module</span></span><a class="headerlink" href="#autograd.core.nn.Module" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.nn.Module.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.nn.Module.parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of all parameters in the module.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.nn.Module.zero_grad">
+<span class="sig-name descname"><span class="pre">zero_grad</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.nn.Module.zero_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Set the gradients of all parameters in the module to zero.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autograd.core.nn.Neuron">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autograd.core.nn.</span></span><span class="sig-name descname"><span class="pre">Neuron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonlin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.nn.Neuron" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#autograd.core.nn.Module" title="autograd.core.nn.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autograd.core.nn.Neuron.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autograd.core.nn.Neuron.parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of all parameters in the neuron.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-autograd.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-autograd.core" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Youness El Brag.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
