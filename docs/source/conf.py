@@ -12,7 +12,6 @@ import sys
 current_dir = os.path.dirname(__file__)
 target_dir = os.path.abspath(os.path.join(current_dir, "../../"))
 sys.path.insert(0, target_dir)
-print(target_dir)
 project = 'Nano-AutoGrad'
 copyright = '2023, Youness El Brag'
 author = 'Youness El Brag'
@@ -54,6 +53,10 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 language = 'python'
+
+html_logo = '_static/logo.png' 
+html_logo_width = 5  # Set the desired width of the logo in pixels
+html_logo_height = 3 # Update the filename and path accordingly
 
 html_theme = "sphinx_rtd_theme"
 

@@ -5,7 +5,6 @@ target_dir = os.path.abspath(os.path.join(current_dir, "../../"))
 sys.path.insert(0, target_dir)
 
 import autograd.torch as tiny
-import torch
 
 
 def test_model():
