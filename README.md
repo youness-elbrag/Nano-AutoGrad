@@ -20,7 +20,7 @@ Nano-AutoGrad is a micro-framework that allows you to build and train neural net
 You can install Nano-AutoGrad using pip:
 
 ```bash
-pip install nano-autograd
+pip install nano-autograds
 ```
 
 ### Features
@@ -55,33 +55,33 @@ To get started with Nano-AutoGrad, refer to the documentation for detailed usage
 
     ```
 * Example 2 :
-
 building 'Linear Model' using torch autograd engine 
 
-```python   
-    
+    ```python  
+
     import autograd.torch.nn as nn 
     import autograd.torch.tensor as Tensor
     import autograd.torch.optim as SGD
-    import autograd.functiona; as F
+    import autograd.functiona as F
 
     class Model(nn.Module):
-            def __init__(self):
-                super().__init__()
-                self.l1 = nn.Linear(784, 1568, name='l1')
-                self.l2 = nn.Linear(1568, 392, name='l2')
-                self.l3 = nn.Linear(392, 10, name='l3')
+        def __init__(self):
+            super().__init__()
+            self.l1 = nn.Linear(784, 1568, name='l1')
+            self.l2 = nn.Linear(1568, 392, name='l2')
+            self.l3 = nn.Linear(392, 10, name='l3')
 
-            def forward(self, x):
-                z = F.relu(self.l1(x))
-                z = F.relu(self.l2(z))
-                out = F.log_softmax(self.l3(z))
-                return out
+        def forward(self, x):
+            z = F.relu(self.l1(x))
+            z = F.relu(self.l2(z))
+            out = F.log_softmax(self.l3(z))
+            return out
 
-        model = Model()
-        optimizer = autograd.optim.SGD(model.parameters(), lr=5e-2, weight_decay=1e-4)
-        scheduler = autograd.optim.lr_scheduler.LinearLR(optimizer, start_factor=1.0, end_factor=0.75, total_iters=num_epochs)
-```
+    model = Model()
+    optimizer = autograd.optim.SGD(model.parameters(), lr=5e-2, weight_decay=1e-4)
+    scheduler = autograd.optim.lr_scheduler.LinearLR(optimizer, start_factor=1.0, end_factor=0.75, total_iters=num_epochs)
+
+    ```
 ### Examples
 
 The Nano-AutoGrad repository provides various examples demonstrating the usage of the framework for different tasks, such as linear regression, classification, and more. You can explore the examples directory in the repository to gain a better understanding of how to use Nano-AutoGrad in practice.

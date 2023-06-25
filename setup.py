@@ -6,7 +6,7 @@ current_dir = os.path.dirname(__file__)
 target_dir = os.path.abspath(os.path.join(current_dir, "."))
 sys.path.insert(0, target_dir)
 
-with open(target_dir+"/README.md", "r") as fh:
+with open(target_dir +"/README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
@@ -17,7 +17,7 @@ setuptools.setup(
     description="A tinyTroch scalar-Engine Nano-autograd a Micro-Framework with a small PyTorch-like neural network library on top.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/deep-matter/Nano-AutoGrad/autograd",
+    url="https://github.com/deep-matter/Nano-AutoGrad/tree/main/autograd",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
