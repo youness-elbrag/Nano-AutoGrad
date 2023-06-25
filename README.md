@@ -7,7 +7,6 @@ This project provides a lightweight Python micro-framework for building and trai
 </div>
 
 ### Installation
-file:///home/black/GitLab/Nano-AutoGrad%20/docs/build/html/index.html
 
 [![Documentation](https://img.shields.io/badge/Documentation-Read%20the%20Docs-blue.svg)](https://nano-autograd.readthedocs.io/en/latest/)
 [![Examples](https://img.shields.io/badge/Examples-GitHub-green.svg)](https://nano-autograd.readthedocs.io/en/latest/README.html)
@@ -103,4 +102,10 @@ For any inquiries or further information, you can reach out to the project maint
 
 
 Please note that you may need to update the contact email address with the appropriate one.
+
+
+### Credits :
+
+1. [micrograd](https://github.com/karpathy/micrograd) Andrej karpathy
+2. [ugrad](https://github.com/conscell/ugrad/tree/main)  conscell 
 
