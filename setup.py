@@ -17,7 +17,7 @@ setuptools.setup(
     description="A tinyTroch scalar-Engine Nano-autograd a Micro-Framework with a small PyTorch-like neural network library on top.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/deep-matter/Nano-AutoGrad/autograd",
+    url="https://github.com/deep-matter/Nano-AutoGrad/tree/main/autograd",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
