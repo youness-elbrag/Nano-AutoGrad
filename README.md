@@ -62,7 +62,7 @@ building 'Linear Model' using torch autograd engine
     import autograd.torch.nn as nn 
     import autograd.torch.tensor as Tensor
     import autograd.torch.optim as SGD
-    import autograd.functiona; as F
+    import autograd.functiona as F
 
     class Model(nn.Module):
         def __init__(self):
