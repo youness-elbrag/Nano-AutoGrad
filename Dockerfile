@@ -17,4 +17,3 @@ RUN apt-get update && \
 
 
 
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health

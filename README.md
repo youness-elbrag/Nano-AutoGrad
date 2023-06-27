@@ -87,6 +87,15 @@ building 'Linear Model' using torch autograd engine
 The Nano-AutoGrad repository provides various examples demonstrating the usage of the framework for different tasks, such as linear regression, classification, and more. You can explore the examples directory in the repository to gain a better understanding of how to use Nano-AutoGrad in practice.
 Contributing please 
 
+**Nano_AutoGrads_tutorial_Linear_model** [![Open Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1o7USeyjTLjmgjjGXkQLt96HYNAbc_r7j)
+</br>
+
+**Nano_AutoGrads_tutorial_Sparse_Networks** [![Open Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wibEbcfqI4r3e8b28TleP562uCooxPw_#scrollTo=_y-pwg1_fNus)
+</br>
+
+**Using Nano-AutoGrads to classify MINIST handwritten digits** [![Open Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wvJQYmYT8-7On7tto3klDN7_Zx4Xgf3_#scrollTo=d4qP5clo9CT5)
+</br>
+
 ### Contributions 
 
 Nano-AutoGrad are welcome! If you have any bug reports, feature requests, or want to contribute code, please open an issue or submit a pull request on the official GitHub repository.

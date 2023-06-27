@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ "Nano-AutoGrad" ]
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: app
+
 jobs:
   build:
 
@@ -38,3 +42,84 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+  # name of the jobs
+  app:
+    # type OS used to build top on ubuntu because is has already docker and docker-compose pre-installed 
+    runs-on: ubuntu-20.04
+    # define the Step to run in this JOB  
+    steps:
+      -
+        name: checking repo code 
+        uses: actions/checkout@v3
+      -
+        name: running Builiding Container
+        run: |
+          docker-compose run --rm -p 8000:8000 app sh -c "exit"
+          echo "Application Run Test Passed"
+# in this Job building Docker image and push into docker-hub with GIT_AUTH_TOKEN to secure repo access
+# this job will be depends on building-django-app 
+  Docker-Setup:
+    needs: app
+    runs-on: ubuntu-20.04
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Auth to docker hub     
+      -
+        name: Docker-login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # Buidling and pushing image to docker repo       
+      - 
+        name: build and push images to DOCKERHUB
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: younessbg/app:latset
+          secrets: |
+            GIT_AUTH_TOKEN= ${{ secrets.GIT_AUTH }}
+
+  GitHub-Container-Registry:
+    needs: ["app","Docker-Setup"]
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      - 
+        name: login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GIT_AUTH }}
+      - 
+        name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v2
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - 
+        name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/deep-matter/app:latset
+          labels: 'latset'
