@@ -4,12 +4,14 @@ This project provides a lightweight Python micro-framework for building and trai
 
 <div align="center">
   <img src="assets/logo.png" alt="Nano-AutoGrad Logo" width="200">
-</div>
 
 ### Installation
 
 [![Documentation](https://img.shields.io/badge/Documentation-Read%20the%20Docs-blue.svg)](https://nano-autograd.readthedocs.io/en/latest/)
 [![Examples](https://img.shields.io/badge/Examples-GitHub-green.svg)](https://nano-autograd.readthedocs.io/en/latest/README.html)
+
+</div>
+
 
 ## Introduction
 
