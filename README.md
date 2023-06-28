@@ -3,17 +3,23 @@
 This project provides a lightweight Python micro-framework for building and training neural networks from scratch based on automatic differentiation and computational graph engine.
 
 <div align="center">
-  <img src="logo.png" alt="Nano-AutoGrad Logo" width="200">
-</div>
+  <img src="assets/logo.png" alt="Nano-AutoGrad Logo" width="200">
 
 ### Installation
 
 [![Documentation](https://img.shields.io/badge/Documentation-Read%20the%20Docs-blue.svg)](https://nano-autograd.readthedocs.io/en/latest/)
 [![Examples](https://img.shields.io/badge/Examples-GitHub-green.svg)](https://nano-autograd.readthedocs.io/en/latest/README.html)
 
+</div>
+
+
 ## Introduction
 
 Nano-AutoGrad is a micro-framework that allows you to build and train neural networks from scratch based on automatic differentiation and computational graphs.
+
+<div align="center">
+  <img src="assets/arch.gif" alt="Nano-AutoGrad Logo" width="600" hieght="600">
+</div>
 
 ## Installation
 

@@ -4,7 +4,7 @@
 digit-recognizer/
 tiny
 img/
-assets/
+app/assets/
 flagged/
 .vscode/
 .ipynb_checkpoints/
