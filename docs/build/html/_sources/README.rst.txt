@@ -1,5 +1,5 @@
-README
-======
+Get started
+===========
 
 Nano-AutoGrad
 =============
@@ -109,7 +109,7 @@ The `SparseMLP` class represents a sparse multi-layer perceptron neural network 
 Linear Model 
 ~~~~~~~~~~~~
 
-building 'Linear Model' using torch autograd engine 
+building `Lieanr Model` using torch autograd engine 
 
 .. code-block:: python   
     
@@ -134,3 +134,8 @@ building 'Linear Model' using torch autograd engine
         model = Model()
         optimizer = autograd.optim.SGD(model.parameters(), lr=5e-2, weight_decay=1e-4)
         scheduler = autograd.optim.lr_scheduler.LinearLR(optimizer, start_factor=1.0, end_factor=0.75, total_iters=num_epochs)
+
+More Examples 
+~~~~~~~~~~~~~
+Visit Repo code  `Github` using torch autograd engine 
+

@@ -9,6 +9,16 @@ sys.path.insert(0, target_dir)
 with open(target_dir +"/README.md", "r") as fh:
     long_description = fh.read()
 
+"""
+Setup Nano-AutoGrad .
+
+ENV:
+    python -m venv autograd && pip install -r requirements.txt
+RUN:
+    python Train.py 
+    
+"""
+
 setuptools.setup(
     name="nano-autograds",
     version="1.1.1",

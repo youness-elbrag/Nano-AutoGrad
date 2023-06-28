@@ -16,7 +16,6 @@ Contents
    :caption: Table of Contents
 
    README
-   setup
    modules
    autograd
    test

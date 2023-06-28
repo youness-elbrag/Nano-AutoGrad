@@ -55,8 +55,8 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 language = 'python'
 
 html_logo = '_static/logo.png' 
-html_logo_width = 5  # Set the desired width of the logo in pixels
-html_logo_height = 3 # Update the filename and path accordingly
+html_logo_width = 400  # Set the desired width of the logo in pixels
+html_logo_height = 400 # Update the filename and path accordingly
 
 html_theme = "sphinx_rtd_theme"
 
